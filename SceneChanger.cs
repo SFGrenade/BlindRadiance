@@ -15,6 +15,8 @@ namespace BlindRadiance
             GameObject backgroundDim = GameObject.Instantiate(plane, null, true);
             backgroundDim.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"));
             backgroundDim.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 128);
+            backgroundDim.GetComponent<BlurPlane>().SetPlaneVisibility(true);
+            GameObject.Destroy(backgroundDim.GetComponent<BlurPlane>());
 
             Log("Background Patched");
         }
