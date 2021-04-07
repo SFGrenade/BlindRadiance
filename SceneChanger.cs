@@ -1,33 +1,28 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using Logger = Modding.Logger;
 
 namespace BlindRadiance
 {
-    class SceneChanger : MonoBehaviour
+    internal class SceneChanger : MonoBehaviour
     {
-        public void Change_BG(UnityEngine.SceneManagement.Scene scene)
+        public void Change_BG(Scene scene)
         {
             Log("Patching Background");
 
-            GameObject plane = GameObject.Find("BlurPlane");
-            GameObject backgroundDim = GameObject.Instantiate(plane, null, true);
+            var plane = GameObject.Find("BlurPlane");
+            var backgroundDim = Instantiate(plane, null, true);
             backgroundDim.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"));
             backgroundDim.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 128);
             backgroundDim.GetComponent<BlurPlane>().SetPlaneVisibility(true);
-            GameObject.Destroy(backgroundDim.GetComponent<BlurPlane>());
+            Destroy(backgroundDim.GetComponent<BlurPlane>());
 
             Log("Background Patched");
         }
 
-        private void Log(String message)
+        private void Log(string message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message}");
-        }
-        private void Log(System.Object message)
-        {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message.ToString()}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
     }
 }

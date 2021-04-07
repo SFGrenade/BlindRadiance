@@ -3,13 +3,9 @@ using Modding;
 
 namespace BlindRadiance
 {
-    public class BrSaveSettings : ModSettings
-    {
-    }
-
     public class BrGlobalSettings : ModSettings
     {
-        public List<string> scenes = new List<string>()
+        public List<string> scenes = new List<string>
         {
             "Dream_Final_Boss",
             "Dream_Final",

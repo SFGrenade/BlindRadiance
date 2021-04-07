@@ -39,16 +39,16 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +62,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>rem "Copy the Mod's dll into the Mods folder"
-      copy "$(ProjectDir)$(OutputPath)\$(ProjectName).dll" "E:\GOG\Hollow Knight Modded\hollow_knight_Data\Managed\Mods\$(ProjectName).dll"
+      copy "$(ProjectDir)$(OutputPath)\$(ProjectName).dll" "E:\GOG\Hollow Knight 1432 Modded\hollow_knight_Data\Managed\Mods\$(ProjectName).dll"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

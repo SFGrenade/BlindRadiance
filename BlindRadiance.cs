@@ -3,23 +3,32 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 using Modding;
+using UnityEngine.SceneManagement;
 
 namespace BlindRadiance
 {
-    public class BlindRadiance : Mod<BrSaveSettings, BrGlobalSettings>
+    public class BlindRadiance : Mod
     {
+        public override ModSettings GlobalSettings
+        {
+            get => _globalSettings;
+            set => _globalSettings = (BrGlobalSettings) value;
+        }
+        private BrGlobalSettings _globalSettings = new BrGlobalSettings();
+        private Type globalSettingsType = typeof(BrGlobalSettings);
+
         internal static BlindRadiance Instance;
 
         private SceneChanger sceneChanger;
 
         public override string GetVersion()
         {
-            Assembly asm = Assembly.GetExecutingAssembly();
-            string ver = asm.GetName().Version.ToString();
-            SHA1 sha1 = SHA1.Create();
-            FileStream stream = File.OpenRead(asm.Location);
-            byte[] hashBytes = sha1.ComputeHash(stream);
-            string hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            var asm = Assembly.GetExecutingAssembly();
+            var ver = asm.GetName().Version.ToString();
+            var sha1 = SHA1.Create();
+            var stream = File.OpenRead(asm.Location);
+            var hashBytes = sha1.ComputeHash(stream);
+            var hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
             stream.Close();
             sha1.Clear();
             return $"{ver}-{hash.Substring(0, 6)}";
@@ -42,13 +51,10 @@ namespace BlindRadiance
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
         }
 
-        private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
+        private void OnSceneChanged(Scene from, Scene to)
         {
-            string scene = GameManager.instance.GetSceneNameString();
-            if (GlobalSettings.scenes.Contains(scene))
-            {
-                sceneChanger.Change_BG(to);
-            }
+            var scene = GameManager.instance.GetSceneNameString();
+            if (_globalSettings.scenes.Contains(scene)) sceneChanger.Change_BG(to);
         }
     }
 }
