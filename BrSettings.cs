@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Modding;
 
 namespace BlindRadiance
 {
-    public class BrGlobalSettings : ModSettings
+    public class BrGlobalSettings
     {
         public List<string> scenes = new List<string>
         {
@@ -13,5 +12,7 @@ namespace BlindRadiance
             "Deepnest_East_Hornet",
             "GG_Hornet_2"
         };
+
+        public bool RemoveBackground = false;
     }
 }
