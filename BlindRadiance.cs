@@ -8,29 +8,29 @@ namespace BlindRadiance
     {
         internal static BlindRadiance Instance;
 
-        private SceneChanger sceneChanger;
+        private readonly SceneChanger _sceneChanger;
 
         public override string GetVersion() => SFCore.Utils.Util.GetVersion(Assembly.GetExecutingAssembly());
 
-        public bool RemoveBackground { get => _globalSettings.RemoveBackground; }
+        public bool RemoveBackground { get => GlobalSettings.RemoveBackground; }
 
         public BlindRadiance() : base("Blind Radiance")
         {
             Instance = this;
 
-            sceneChanger = new SceneChanger();
+            _sceneChanger = new SceneChanger();
         }
 
         public override void Initialize()
         {
             Log("Initializing");
 
-            initCallbacks();
+            InitCallbacks();
 
             Log("Initialized");
         }
 
-        private void initCallbacks()
+        private void InitCallbacks()
         {
             // Hooks
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
@@ -39,8 +39,8 @@ namespace BlindRadiance
         private void OnSceneChanged(Scene from, Scene to)
         {
             var scene = GameManager.instance.GetSceneNameString();
-            if (_globalSettings.RemoveBackground) sceneChanger.Change_BG(to);
-            if (_globalSettings.scenes.Contains(scene)) sceneChanger.Change_BG(to);
+            if (GlobalSettings.RemoveBackground) _sceneChanger.Change_BG(to);
+            if (GlobalSettings.scenes.Contains(scene)) _sceneChanger.Change_BG(to);
         }
     }
 }
