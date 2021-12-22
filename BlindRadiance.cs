@@ -38,7 +38,7 @@ namespace BlindRadiance
 
         private void OnSceneChanged(Scene from, Scene to)
         {
-            var scene = GameManager.instance.GetSceneNameString();
+            var scene = to.name;
             if (GlobalSettings.RemoveBackground) _sceneChanger.Remove_BG(to);
             if (GlobalSettings.scenes.Contains(scene)) _sceneChanger.Change_BG(to);
         }

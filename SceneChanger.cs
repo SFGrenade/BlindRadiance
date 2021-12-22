@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SFCore.Utils;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Logger = Modding.Logger;
 
@@ -11,7 +12,7 @@ namespace BlindRadiance
 
             Log("Patching Background");
 
-            var plane = GameObject.Find("BlurPlane");
+            var plane = scene.Find("BlurPlane");
 
             var backgroundDim = Instantiate(plane, null, true);
             backgroundDim.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"))
