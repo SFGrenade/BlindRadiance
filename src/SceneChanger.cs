@@ -3,52 +3,51 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Logger = Modding.Logger;
 
-namespace BlindRadiance
+namespace BlindRadiance;
+
+internal class SceneChanger : MonoBehaviour
 {
-    internal class SceneChanger : MonoBehaviour
+    public void Change_BG(Scene scene)
     {
-        public void Change_BG(Scene scene)
+
+        Log("Patching Background");
+
+        var plane = scene.Find("BlurPlane");
+
+        var backgroundDim = Instantiate(plane, null, true);
+        backgroundDim.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"))
         {
+            color = new Color(0, 0, 0, 128)
+        };
+        backgroundDim.GetComponent<BlurPlane>().SetPlaneVisibility(true);
+        Destroy(backgroundDim.GetComponent<BlurPlane>());
 
-            Log("Patching Background");
+        Log("Background Patched");
+    }
+    public void Remove_BG(Scene scene)
+    {
 
-            var plane = scene.Find("BlurPlane");
+        Log("Removing Background");
 
-            var backgroundDim = Instantiate(plane, null, true);
-            backgroundDim.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"))
-            {
-                color = new Color(0, 0, 0, 128)
-            };
-            backgroundDim.GetComponent<BlurPlane>().SetPlaneVisibility(true);
-            Destroy(backgroundDim.GetComponent<BlurPlane>());
+        var plane = GameObject.Find("BlurPlane");
 
-            Log("Background Patched");
-        }
-        public void Remove_BG(Scene scene)
-        {
+        var planeZ = plane.transform.position.z;
+        foreach (var go in scene.GetRootGameObjects())
+        foreach (var t in go.GetComponentsInChildren<Transform>())
+            if (t != null && t.gameObject != null)
+                if (t.position.z > planeZ)
+                    Destroy(t.gameObject);
 
-            Log("Removing Background");
+        Log("Background Removed");
+    }
 
-            var plane = GameObject.Find("BlurPlane");
-
-            var planeZ = plane.transform.position.z;
-            foreach (var go in scene.GetRootGameObjects())
-            foreach (var t in go.GetComponentsInChildren<Transform>())
-                if (t != null && t.gameObject != null)
-                    if (t.position.z > planeZ)
-                        Destroy(t.gameObject);
-
-            Log("Background Removed");
-        }
-
-        private void Log(string message)
-        {
-            Logger.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
-            Debug.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
-        }
-        private void Log(object message)
-        {
-            Log($"{message}");
-        }
+    private void Log(string message)
+    {
+        Logger.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
+        Debug.Log($"[{GetType().FullName?.Replace(".", "]:[")}] - {message}");
+    }
+    private void Log(object message)
+    {
+        Log($"{message}");
     }
 }
