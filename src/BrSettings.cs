@@ -4,7 +4,9 @@ namespace BlindRadiance;
 
 public class BrGlobalSettings
 {
-    public List<string> scenes = new List<string>
+    public bool UseWhiteList = true;
+    public bool RemoveBackground = false;
+    public List<string> SceneWhiteList = new List<string>
     {
         "Dream_Final_Boss",
         "Dream_Final",
@@ -12,6 +14,4 @@ public class BrGlobalSettings
         "Deepnest_East_Hornet",
         "GG_Hornet_2"
     };
-
-    public bool RemoveBackground = false;
 }

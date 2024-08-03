@@ -12,7 +12,10 @@ public class BlindRadiance : GlobalSettingsMod<BrGlobalSettings>
 
     public override string GetVersion() => SFCore.Utils.Util.GetVersion(Assembly.GetExecutingAssembly());
 
-    public bool RemoveBackground { get => GlobalSettings.RemoveBackground; }
+    public bool RemoveBackground
+    {
+        get => GlobalSettings.RemoveBackground;
+    }
 
     public BlindRadiance() : base("Blind Radiance")
     {
@@ -39,7 +42,15 @@ public class BlindRadiance : GlobalSettingsMod<BrGlobalSettings>
     private void OnSceneChanged(Scene from, Scene to)
     {
         var scene = to.name;
-        if (GlobalSettings.RemoveBackground) _sceneChanger.Remove_BG(to);
-        if (GlobalSettings.scenes.Contains(scene)) _sceneChanger.Change_BG(to);
+        if (GlobalSettings.UseWhiteList && GlobalSettings.SceneWhiteList.Contains(scene))
+        {
+            if (GlobalSettings.RemoveBackground) _sceneChanger.Remove_BG(to);
+            _sceneChanger.Change_BG(to);
+        }
+        else if (!GlobalSettings.UseWhiteList)
+        {
+            if (GlobalSettings.RemoveBackground) _sceneChanger.Remove_BG(to);
+            _sceneChanger.Change_BG(to);
+        }
     }
 }
