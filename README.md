@@ -5,6 +5,6 @@ This mod makes the background of selected scenes black for better visibility of 
 These selected scenes are adjustable in this mod's global settings file.
 
 # EUPL
-                      Copyright (c) 2024 SFGrenade
+                      Copyright (c) 2025 SFGrenade
                       Licensed under the EUPL-1.2
 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
