@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="$(HollowKnightRefs)/*.dll" />
+    <Reference Include="$(HollowKnightRefs)/Mods/Satchel/Satchel.dll" />
     <Reference Condition="!Exists('../SFCore/SFCore.csproj')" Include="$(HollowKnightRefs)/Mods/SFCore/SFCore.dll" />
   </ItemGroup>
   <ItemGroup>

@@ -14,4 +14,5 @@ public class BrGlobalSettings
         "Deepnest_East_Hornet",
         "GG_Hornet_2"
     };
+    public float Opacity = 1.0f;
 }

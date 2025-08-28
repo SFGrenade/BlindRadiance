@@ -16,7 +16,7 @@ internal class SceneChanger : MonoBehaviour
         GameObject backgroundDim = Instantiate(plane, null, true);
         backgroundDim.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Sprites/Default"))
         {
-            color = new Color(0, 0, 0, 128)
+            color = new Color(0, 0, 0, BlindRadiance.GlobalSettings.Opacity)
         };
         backgroundDim.GetComponent<BlurPlane>().SetPlaneVisibility(true);
         Destroy(backgroundDim.GetComponent<BlurPlane>());
